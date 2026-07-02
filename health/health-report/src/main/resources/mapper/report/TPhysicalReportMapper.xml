@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.health.report.mapper.TPhysicalReportMapper">
+
+    <resultMap type="TPhysicalReport" id="TPhysicalReportResult">
+        <result property="id"    column="id"    />
+        <result property="reportNo"    column="report_no"    />
+        <result property="name"    column="name"    />
+        <result property="gender"    column="gender"    />
+        <result property="age"    column="age"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="phone"    column="phone"    />
+        <result property="examDate"    column="exam_date"    />
+        <result property="examType"    column="exam_type"    />
+        <result property="department"    column="department"    />
+        <result property="conclusion"    column="conclusion"    />
+        <result property="suggestion"    column="suggestion"    />
+        <result property="doctor"    column="doctor"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTPhysicalReportVo">
+        select id, report_no, name, gender, age, id_card, phone, exam_date, exam_type, department, conclusion, suggestion, doctor, status, remark, create_by, create_time, update_by, update_time from t_physical_report
+    </sql>
+
+    <select id="selectTPhysicalReportList" parameterType="TPhysicalReport" resultMap="TPhysicalReportResult">
+        <include refid="selectTPhysicalReportVo"/>
+        <where>
+            <if test="reportNo != null  and reportNo != ''"> and report_no = #{reportNo}</if>
+            <if test="name != null  and name != ''"> and name like concat('%'', #{name}, ''%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="idCard != null  and idCard != ''"> and id_card = #{idCard}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="examDate != null "> and exam_date = #{examDate}</if>
+            <if test="examType != null  and examType != ''"> and exam_type = #{examType}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="doctor != null  and doctor != ''"> and doctor = #{doctor}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectTPhysicalReportById" parameterType="Long" resultMap="TPhysicalReportResult">
+        <include refid="selectTPhysicalReportVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTPhysicalReport" parameterType="TPhysicalReport" useGeneratedKeys="true" keyProperty="id">
+        insert into t_physical_report
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reportNo != null">report_no,</if>
+            <if test="name != null">name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="age != null">age,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="phone != null">phone,</if>
+            <if test="examDate != null">exam_date,</if>
+            <if test="examType != null">exam_type,</if>
+            <if test="department != null">department,</if>
+            <if test="conclusion != null">conclusion,</if>
+            <if test="suggestion != null">suggestion,</if>
+            <if test="doctor != null">doctor,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reportNo != null">#{reportNo},</if>
+            <if test="name != null">#{name},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="age != null">#{age},</if>
+            <if test="idCard != null">#{idCard},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="examDate != null">#{examDate},</if>
+            <if test="examType != null">#{examType},</if>
+            <if test="department != null">#{department},</if>
+            <if test="conclusion != null">#{conclusion},</if>
+            <if test="suggestion != null">#{suggestion},</if>
+            <if test="doctor != null">#{doctor},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPhysicalReport" parameterType="TPhysicalReport">
+        update t_physical_report
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="reportNo != null">report_no = #{reportNo},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="examDate != null">exam_date = #{examDate},</if>
+            <if test="examType != null">exam_type = #{examType},</if>
+            <if test="department != null">department = #{department},</if>
+            <if test="conclusion != null">conclusion = #{conclusion},</if>
+            <if test="suggestion != null">suggestion = #{suggestion},</if>
+            <if test="doctor != null">doctor = #{doctor},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPhysicalReportById" parameterType="Long">
+        delete from t_physical_report where id = #{id}
+    </delete>
+
+    <delete id="deleteTPhysicalReportByIds" parameterType="String">
+        delete from t_physical_report where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectTPhysicalReportStats" parameterType="TPhysicalReport" resultMap="TPhysicalReportResult">
+        select exam_type, count(*) as total_count, status
+        from t_physical_report
+        <where>
+            <if test="examDate != null"> and exam_date = #{examDate}</if>
+            <if test="examType != null  and examType != ''"> and exam_type = #{examType}</if>
+            <if test="name != null  and name != ''"> and name like concat('%'', #{name}, ''%')</if>
+        </where>
+        group by exam_type, status
+    </select>
+</mapper>
